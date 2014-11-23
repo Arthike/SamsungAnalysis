@@ -7,7 +7,7 @@ run_analysis.R <- funciont() {
         unzipdir <- "./SamsungData"
         unzip("getdata-projectfiles-UCI HAR Dataset.zip",exdir=unzipdir)
         
-        WD <- "./SamsungData/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/" ## Working Directory
+        WD <- "./SamsungData/UCI HAR Dataset/" ## Working Directory
         ## Reading from Textfile without headers into a Data Frame
         Activity_df<- read.table(paste(WD,"activity_labels.txt",sep=""), header=FALSE, quote="\"", sep=" ")
         
