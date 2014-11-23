@@ -9,8 +9,8 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
  0. It sets the default working directory as the actual working directory with setwd(getwd())
  1. Unzips the "getdata-projectfiles-UCI HAR Dataset.zip" file to the "./SamsungData" directory.
  2. Reads 
-  "activity_labels.txt" data into Activity_df 
-  "subject_test.txt" data into TestSubjects
+  * "activity_labels.txt" data into Activity_df 
+  * "subject_test.txt" data into TestSubjects
   "X_test.txt" data into TestData
   "y_test.txt" data into TestLabels
   "subject_train.txt" data into TrainSubjects
