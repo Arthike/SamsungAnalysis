@@ -29,3 +29,5 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
                 lW <- append(lW,as.character(Activity_df[Labels[i],2])) ## Generation Activity Labels
         }
 
+ * Individual data is column binded together to form a tbl_df object called cran
+ * cran is summarized and converted into Summary which gets printed into "Run_Analisys.txt" file
