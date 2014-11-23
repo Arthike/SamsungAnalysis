@@ -6,8 +6,26 @@ http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartpho
 The data for the project:  
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip  
 * The run_analysis.R script performs the following steps to clean the data:   
- 0. Unzip the getdata-projectfiles-UCI HAR Dataset.zip file and locate the data in the "./SamsungData" directory.
- 
-0b. Read activity_labels.txt data into Activity_df and subject_test.txt data into Subjects
- 1. 1. Read X_train.txt, y_train.txt and subject_train.txt from the "./data/train" folder and store them in *trainData*, *trainLabel* and *trainSubject* variables respectively.       
- 2. Read X_test.txt, y_test.txt and subject_test.txt from the "./data/test" folder and store them in *testData*, *testLabel* and *testsubject* variables respectively.  
+ 0. It sets the default working directory as the actual working directory with setwd(getwd())
+ 1. Unzips the "getdata-projectfiles-UCI HAR Dataset.zip" file to the "./SamsungData" directory.
+ 2. Reads 
+  "activity_labels.txt" data into Activity_df 
+  "subject_test.txt" data into TestSubjects
+  "X_test.txt" data into TestData
+  "y_test.txt" data into TestLabels
+  "subject_train.txt" data into TrainSubjects
+  "X_train.txt" data into TrainData
+  "y_train.txt" data into TrainLabels
+ 2. Join information in a single Vector:
+  For numeric representation of Subjects: 
+   Subjects <- as.numeric(append(TestSubjects, TrainSubjects))
+   For Data: Data <- append(TestData, TrainData)
+    * Extract number values and calculates the mean and standard deviation for each subject sampled:
+    Data <- strsplit(Data, " ")
+    for (i in 1:length(Data)) {
+                tempData <- as.numeric(Data[[i]])
+                mW <- append(mW,mean(tempData, na.rm=TRUE)) ## Generating Means
+                sdW <- append(sdW,sd(tempData, na.rm=TRUE)) ## Generating Standard Deviations
+                lW <- append(lW,as.character(Activity_df[Labels[i],2])) ## Generation Activity Labels
+        }
+
