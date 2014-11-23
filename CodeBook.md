@@ -16,18 +16,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
   * "subject_train.txt" data into TrainSubjects
   * "X_train.txt" data into TrainData
   * "y_train.txt" data into TrainLabels
- 3. Join information in a single Vector:
-  * For numeric representation of Subjects: 
-   - Subjects <- as.numeric(append(TestSubjects, TrainSubjects))
-   - For Data: Data <- append(TestData, TrainData)
-    * Extract number values and calculates the mean and standard deviation for each subject sampled:
-    * Data <- strsplit(Data, " ")
-    * for (i in 1:length(Data)) {
-                tempData <- as.numeric(Data[[i]])
-                mW <- append(mW,mean(tempData, na.rm=TRUE)) ## Generating Means
-                sdW <- append(sdW,sd(tempData, na.rm=TRUE)) ## Generating Standard Deviations
-                lW <- append(lW,as.character(Activity_df[Labels[i],2])) ## Generation Activity Labels
-        }
-
- * Individual data is column binded together to form a tbl_df object called cran
- * cran is summarized and converted into Summary which gets printed into "Run_Analisys.txt" file
+ 3. Joins information in a single Vector for each variable: Subjects, Data, Labels.
+ 4. Generates mean, standard deviation vectors from Data and stores them into mW and sdW repectively. Also generates lW vector from Labels. 
+ 5. Vectors Subjects, lW, mW and sdW are column binded together to form a tbl_df object called cran
+ 6. Finally, cran is summarized and converted into Summary which gets printed into "Run_Analisys.txt" file
