@@ -1,4 +1,5 @@
-run_analysis.R <- funciont() {
+run_analysis.R <- function() {
+        setwd(getwd())
         if(!file.exists("SamsungData")) {
                 dir.create("SamsungData")
         }
@@ -7,7 +8,7 @@ run_analysis.R <- funciont() {
         unzipdir <- "./SamsungData"
         unzip("getdata-projectfiles-UCI HAR Dataset.zip",exdir=unzipdir)
         
-        WD <- "./SamsungData/UCI HAR Dataset/" ## Working Directory
+        WD <- "./SamsungData/UCI HAR Dataset/" ## Data Directory
         ## Reading from Textfile without headers into a Data Frame
         Activity_df<- read.table(paste(WD,"activity_labels.txt",sep=""), header=FALSE, quote="\"", sep=" ")
         
@@ -60,17 +61,15 @@ run_analysis.R <- funciont() {
         sdW <- sdW[-1] ## Removing first Element
         lW <- lW[-1] ## Removing first Element
         
-        mydf <- cbind(Subjects, lW, mW, sdW) ## Tidy Data Set in Data Frame Format
-        names(mydf) <- c("subjectid", "activity", "measurementsmean", "measurementsstd")
-        mydf<-as.data.frame(mydf)
-        
+        mydf <- as.data.frame(cbind(Subjects, lW, mW, sdW)) ## Gathering Data into Single Data Frame
         
         library(dplyr)
         cran <- tbl_df(mydf) ## Tidy Data Set in Table Data Frame Format (dplyr)
         rm("mydf")
                         
-        x <- by_Subject_Activity <- group_by(cran, as.numeric(Subjects), lW) ## Second Data Set by Subject_ID and Activity
-        Summary <- summarize(by_Subject_Activity, mean(as.numeric(as.character(mW))), mean(as.numeric(as.character(sdW))))
+        Summary <- cran %>%
+        group_by(as.numeric(Subjects), lW) %>% ## Second Data Set by Subject_ID and Activity
+        summarize(mean(as.numeric(as.character(mW))), mean(as.numeric(as.character(sdW))))
         names(Summary)<- c("Subject_ID","Activity","mW","sdW")
         write.table(Summary,"Run_Analysis.txt", row.name=FALSE) ## Recording Summary Analysis on Text File.
 }
